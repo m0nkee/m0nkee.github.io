@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Stay Hungry Stay Foolish]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://m0nkee.github.io/"/>
-  <updated>2015-09-02T07:41:57.004Z</updated>
+  <updated>2015-09-02T07:44:11.591Z</updated>
   <id>http://m0nkee.github.io/</id>
   
   <author>
@@ -15,11 +15,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[动态规划 dynamic_programming]]></title>
+    <title><![CDATA[动态规划]]></title>
     <link href="http://m0nkee.github.io/2015/09/02/dynamic-programming/"/>
     <id>http://m0nkee.github.io/2015/09/02/dynamic-programming/</id>
     <published>2015-09-02T07:35:24.000Z</published>
-    <updated>2015-09-02T07:41:57.004Z</updated>
+    <updated>2015-09-02T07:44:11.591Z</updated>
     <content type="html"><![CDATA[<h2 id="动态规划_(Dynamic_Programming)">动态规划 (Dynamic Programming)</h2><p>适用于<strong>重叠子问题</strong>和<strong>最优子结构</strong>性质的问题。</p>
 <p>大致思路:<br>待解决一个问题 –&gt; 将其分解成不同部分（即子问题） –&gt; 求解子问题 –&gt; 合并子问题的解，得出原问题的解 </p>
 <p>最优子结构：局部最优解决定全局最优解</p>
