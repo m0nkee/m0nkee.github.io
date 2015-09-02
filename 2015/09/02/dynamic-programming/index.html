@@ -4,23 +4,50 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>dynamic_programming | Monkee</title>
+    <title>动态规划 dynamic_programming | Monkee</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Monkee Lei">
     
 
     
-    <meta name="description" content="Monkee&apos;s Blog">
+    <meta name="description" content="动态规划 (Dynamic Programming)适用于重叠子问题和最优子结构性质的问题。
+大致思路:待解决一个问题 –&amp;gt; 将其分解成不同部分（即子问题） –&amp;gt; 求解子问题 –&amp;gt; 合并子问题的解，得出原问题的解 
+最优子结构：局部最优解决定全局最优解
+适用情况：
+
+最优结构性质
+无后效性。即子问题的解一旦确定，就不会改变。
+子问题重叠性质
+
+实例：斐波那契数列问题基本算法：12">
 <meta property="og:type" content="article">
-<meta property="og:title" content="dynamic_programming">
+<meta property="og:title" content="动态规划 dynamic_programming">
 <meta property="og:url" content="http://m0nkee.github.io/2015/09/02/dynamic-programming/index.html">
 <meta property="og:site_name" content="Monkee">
-<meta property="og:description" content="Monkee&apos;s Blog">
-<meta property="og:updated_time" content="2015-09-02T07:35:24.803Z">
+<meta property="og:description" content="动态规划 (Dynamic Programming)适用于重叠子问题和最优子结构性质的问题。
+大致思路:待解决一个问题 –&amp;gt; 将其分解成不同部分（即子问题） –&amp;gt; 求解子问题 –&amp;gt; 合并子问题的解，得出原问题的解 
+最优子结构：局部最优解决定全局最优解
+适用情况：
+
+最优结构性质
+无后效性。即子问题的解一旦确定，就不会改变。
+子问题重叠性质
+
+实例：斐波那契数列问题基本算法：12">
+<meta property="og:updated_time" content="2015-09-02T07:41:57.004Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="dynamic_programming">
-<meta name="twitter:description" content="Monkee&apos;s Blog">
+<meta name="twitter:title" content="动态规划 dynamic_programming">
+<meta name="twitter:description" content="动态规划 (Dynamic Programming)适用于重叠子问题和最优子结构性质的问题。
+大致思路:待解决一个问题 –&amp;gt; 将其分解成不同部分（即子问题） –&amp;gt; 求解子问题 –&amp;gt; 合并子问题的解，得出原问题的解 
+最优子结构：局部最优解决定全局最优解
+适用情况：
+
+最优结构性质
+无后效性。即子问题的解一旦确定，就不会改变。
+子问题重叠性质
+
+实例：斐波那契数列问题基本算法：12">
 <meta name="twitter:creator" content="@monkee_lei">
 
     
@@ -80,7 +107,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/09/02/dynamic-programming/" title="dynamic_programming" itemprop="url">dynamic_programming</a>
+      <a href="/2015/09/02/dynamic-programming/" title="动态规划 dynamic_programming" itemprop="url">动态规划 dynamic_programming</a>
   </h1>
   <p class="article-author">By
        
@@ -96,15 +123,48 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#动态规划_(Dynamic_Programming)"><span class="toc-number">1.</span> <span class="toc-text">动态规划 (Dynamic Programming)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最短路径问题_Floyd-Warshall算法"><span class="toc-number">2.</span> <span class="toc-text">最短路径问题 Floyd-Warshall算法</span></a></li></ol>
 		
 		</div>
 		
-		  
+		<h2 id="动态规划_(Dynamic_Programming)">动态规划 (Dynamic Programming)</h2><p>适用于<strong>重叠子问题</strong>和<strong>最优子结构</strong>性质的问题。</p>
+<p>大致思路:<br>待解决一个问题 –&gt; 将其分解成不同部分（即子问题） –&gt; 求解子问题 –&gt; 合并子问题的解，得出原问题的解 </p>
+<p>最优子结构：局部最优解决定全局最优解</p>
+<p>适用情况：</p>
+<ol>
+<li>最优结构性质</li>
+<li>无后效性。即子问题的解一旦确定，就不会改变。</li>
+<li>子问题重叠性质</li>
+</ol>
+<p>实例：<br>斐波那契数列问题<br>基本算法：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function <span class="function"><span class="title">fib</span><span class="params">(n)</span></span></span><br><span class="line">    <span class="keyword">if</span> n = <span class="number">0</span> or n = <span class="number">1</span></span><br><span class="line">        return <span class="number">1</span></span><br><span class="line">    return <span class="function"><span class="title">fib</span><span class="params">(n-<span class="number">1</span>)</span></span> + <span class="function"><span class="title">fib</span><span class="params">(n-<span class="number">2</span>)</span></span></span><br></pre></td></tr></table></figure></p>
+<p>上述的迭代过程很显然有很多重复计算的子问题，这样使程序不够高效。<br>改进方法：我们可以通过保存已经算出的子问题的解，来避免重复计算，当然这会耗费掉一些内存空间。【空间换取时间】<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">array map[<span class="operator">0...<span class="keyword">n</span>] = &#123;<span class="number">0</span>=&gt;<span class="number">0</span>,<span class="number">1</span>=&gt;<span class="number">1</span>&#125;</span><br><span class="line">fib(<span class="keyword">n</span>)</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">map</span> <span class="keyword">m</span> dose <span class="keyword">not</span> contain <span class="keyword">key</span> <span class="keyword">n</span>)</span><br><span class="line">        <span class="keyword">m</span>[<span class="keyword">n</span>] := fib(<span class="keyword">n</span>-<span class="number">1</span>) + fib(<span class="keyword">n</span>-<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">m</span>[<span class="keyword">n</span>]</span></span><br></pre></td></tr></table></figure></p>
+<p>使用动态规划的常用算法：</p>
+<ul>
+<li>最长单调子序列</li>
+<li>最长公共子序列 LCS</li>
+<li>Floyd-Warshall算法 最短路径问题</li>
+<li>Viterbi算法</li>
+</ul>
+<p>##LCS问题：</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line">/<span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span></span><br><span class="line"> 文件名        ：lcs.cpp</span><br><span class="line"> 创建者        ：Monkee</span><br><span class="line"> 创建时间      ：2015/8/30 10:34:35</span><br><span class="line"> 功能描述      ：动态规划解决LCS问题</span><br><span class="line">              </span><br><span class="line"> <span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span>/</span><br><span class="line"></span><br><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line"><span class="comment">#include &lt;vector&gt;</span></span><br><span class="line"><span class="comment">#include &lt;string&gt;</span></span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int max(int a,int b)</span><br><span class="line">&#123;</span><br><span class="line">	return (a&gt;b) ? a : b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//最长公共子序列(不要求连续)</span><br><span class="line">//使用一个二维表来存储状态</span><br><span class="line">int LCS1(string x,string y,int m,int n)</span><br><span class="line">&#123;</span><br><span class="line">	vector<span class="variable">&lt;vector&lt;int&gt;</span> &gt; matrix(m+1,vector<span class="variable">&lt;int&gt;</span>(n+1));</span><br><span class="line">	</span><br><span class="line">	for (int i=0;i<span class="variable">&lt;m+1;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		for(int j=0;j&lt;n+1;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			if (i == 0 || j ==0)</span><br><span class="line">			&#123;</span><br><span class="line">				matrix[i][j] = 0;</span><br><span class="line">			&#125; else if(x[i-1] == y[j-1])&#123;</span><br><span class="line">				matrix[i][j] = matrix[i-1][j-1] + 1;</span><br><span class="line">			&#125; else &#123;</span><br><span class="line">				matrix[i][j] = max(matrix[i-1][j],matrix[i][j-1]);</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return matrix[m][n];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//最长公共子串</span><br><span class="line">//使用一个一维表来存储状态</span><br><span class="line">int LCS2(string x,string y,int m,int n)</span><br><span class="line">&#123;</span><br><span class="line">	vector&lt;int&gt;</span> array(n);</span><br><span class="line">	int maxl = 0;</span><br><span class="line"></span><br><span class="line">	for (int j=0;j<span class="variable">&lt;m;j++)</span><br><span class="line">	&#123;</span><br><span class="line">		for (int i=n-1;i&gt;</span>=0;i--)</span><br><span class="line">		&#123;</span><br><span class="line">			if (i==0 ||<span class="string"> j==0)</span><br><span class="line">			&#123;</span><br><span class="line">				if (x[j] == y[i])</span><br><span class="line">				&#123;</span><br><span class="line">					array[i] = 1;</span><br><span class="line">				&#125; else &#123;</span><br><span class="line">					array[i] = 0;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125; else if (x[j] == y[i])</span><br><span class="line">			&#123;</span><br><span class="line">				array[i] = array[i-1] + 1;</span><br><span class="line">			&#125; else &#123;</span><br><span class="line">				array[i] = 0;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			if (array[i] &gt; maxl)</span><br><span class="line">			&#123;</span><br><span class="line">				maxl = array[i];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return maxl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	string x = "ABCDEFGH";</span><br><span class="line">	string y = "ABCdfeghEFGH";</span><br><span class="line"></span><br><span class="line">	cout&lt;&lt;"最长公共子序列："&lt;&lt;LCS1(x,y,x.length(),y.length())&lt;&lt;endl;</span><br><span class="line">	cout&lt;&lt;"最长公共子串："&lt;&lt;LCS2(x,y,x.length(),y.length())&lt;&lt;endl;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="最短路径问题_Floyd-Warshall算法">最短路径问题 Floyd-Warshall算法</h2><p>Floyd-Warshall算法，简称Floyd算法，用于求解任意两点间的最短距离，即多源最短路径问题，时间复杂度为O(n^3)，空间复杂度为O(n^2)。</p>
+<p>算法代码实现如下：<br><figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">void Floyd()&#123;</span><br><span class="line">    int i,j,k;</span><br><span class="line">    for(k=1;k&lt;=n;k++)</span><br><span class="line">        for(i=1;i&lt;=n;i++)</span><br><span class="line">            for(j=1;j&lt;=n;j++)</span><br><span class="line">                if(dist<span class="comment">[i]</span><span class="comment">[k]</span>+dist<span class="comment">[k]</span><span class="comment">[j]</span>&lt;dist<span class="comment">[i]</span><span class="comment">[j]</span>)</span><br><span class="line">                    dist<span class="comment">[i]</span><span class="comment">[j]</span>=dist<span class="comment">[i]</span><span class="comment">[k]</span>+dist<span class="comment">[k]</span><span class="comment">[j]</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>参考：</p>
+<ul>
+<li><a href="http://songlee24.github.io/2014/11/29/print-all-LCS/" target="_blank" rel="external">输出最长公共子序列</a></li>
+<li><a href="http://blog.csdn.net/v_JULY_v/article/details/6110269" target="_blank" rel="external">动态规划算法解LCS问题</a></li>
+<li><a href="http://wiki.jikexueyuan.com/project/easy-learn-algorithm/floyd.html" target="_blank" rel="external">只有五行的 Floyd 最短路算法</a></li>
+</ul>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/dynamic-programing/">dynamic_programing</a>
+  </div>
 
 </div>
 
@@ -112,7 +172,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://m0nkee.github.io/2015/09/02/dynamic-programming/" data-title="dynamic_programming | Monkee" data-tsina="null" class="share clearfix">
+	  <div data-url="http://m0nkee.github.io/2015/09/02/dynamic-programming/" data-title="动态规划 dynamic_programming | Monkee" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -138,7 +198,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/09/02/dynamic-programming/" data-title="dynamic_programming" data-url="http://m0nkee.github.io/2015/09/02/dynamic-programming/"></div>
+	<div class="ds-thread" data-thread-key="2015/09/02/dynamic-programming/" data-title="动态规划 dynamic_programming" data-url="http://m0nkee.github.io/2015/09/02/dynamic-programming/"></div>
 
 </section>
 
@@ -149,7 +209,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#动态规划_(Dynamic_Programming)"><span class="toc-number">1.</span> <span class="toc-text">动态规划 (Dynamic Programming)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最短路径问题_Floyd-Warshall算法"><span class="toc-number">2.</span> <span class="toc-text">最短路径问题 Floyd-Warshall算法</span></a></li></ol>
  
   </div>
 
@@ -170,6 +230,10 @@
 		
 			
 				<li><a href="/tags/数据结构/" title="数据结构">数据结构<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/dynamic-programing/" title="dynamic_programing">dynamic_programing<sup>1</sup></a></li>
 			
 		
 			
