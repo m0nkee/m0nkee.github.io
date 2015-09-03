@@ -47,7 +47,7 @@ c代码：1234567891011121314151617181920212223void Swap(int *a,int *b)&amp;#123
 <meta property="og:image" content="http://wuchong.me/img/Quicksort-example.gif">
 <meta property="og:image" content="http://wuchong.me/img/Heapsort-example.gif">
 <meta property="og:image" content="http://blog.chinaunix.net/attachment/201201/18/21457204_1326898064RUxx.jpg">
-<meta property="og:updated_time" content="2015-08-18T12:59:31.896Z">
+<meta property="og:updated_time" content="2015-09-02T08:32:29.265Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="排序算法及其比较">
 <meta name="twitter:description" content="这里以从小到大排序为例
@@ -210,52 +210,45 @@ c代码：1234567891011121314151617181920212223void Swap(int *a,int *b)&amp;#123
 <p>动态演示：</p>
 <p><img src="http://wuchong.me/img/Heapsort-example.gif" alt=""></p>
 <p>c代码：</p>
-<pre><code><span class="function"><span class="keyword">void</span> <span class="title">shift</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> ind,<span class="keyword">int</span> n)</span>
-</span>{
-    <span class="keyword">int</span> tmp;
-    <span class="keyword">int</span> i = ind;
-    <span class="keyword">int</span> c = i*<span class="number">2</span>+<span class="number">1</span>;
-
-    <span class="keyword">while</span> (c &lt; n)
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">shift</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> ind,<span class="keyword">int</span> n)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> tmp;</span><br><span class="line">	<span class="keyword">int</span> i = ind;</span><br><span class="line">	<span class="keyword">int</span> c = i*<span class="number">2</span>+<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (c &lt; n)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (c+<span class="number">1</span>&lt;n &amp;&amp; a[c] &lt; a[c+<span class="number">1</span>])</span><br><span class="line">		&#123;</span><br><span class="line">			c++;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (a[i]&gt;a[c]) </span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			tmp = a[c];</span><br><span class="line">			a[c] = a[i];</span><br><span class="line">			a[i] = tmp;</span><br><span class="line"></span><br><span class="line">			i = c;</span><br><span class="line">			c = <span class="number">2</span>*i+<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">heap_sort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> n)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,tmp;</span><br><span class="line">	<span class="comment">/*初始化堆*/</span></span><br><span class="line">	<span class="keyword">for</span>(i=(n-<span class="number">2</span>)/<span class="number">2</span>;i&gt;=<span class="number">0</span>;i--)</span><br><span class="line">		shift(a,i,n);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">/*将堆的根节点保存*/</span></span><br><span class="line">		tmp = a[<span class="number">0</span>];</span><br><span class="line">		a[<span class="number">0</span>] = a[n-i-<span class="number">1</span>];</span><br><span class="line">		a[n-i-<span class="number">1</span>] = tmp;</span><br><span class="line"></span><br><span class="line">		<span class="comment">/**/</span></span><br><span class="line">		shift(a,<span class="number">0</span>,n-i-<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">```   </span><br><span class="line"></span><br><span class="line"><span class="preprocessor">## 基数排序</span></span><br><span class="line"></span><br><span class="line">基数排序是一种**非比较型**的整数排序算法。</span><br><span class="line"></span><br><span class="line">[基数排序演示](http:<span class="comment">//www.cs.usfca.edu/~galles/visualization/RadixSort.html)</span></span><br><span class="line"></span><br><span class="line">原理：</span><br><span class="line">&gt; 将整数按位数切割成不同的数字，然后按每个位数分别比较。由于整数也可以表达字符串（比如名字或日期）和特定格式的浮点数，所以基数排序也不是只能使用于整数。</span><br><span class="line"></span><br><span class="line">steps：</span><br><span class="line">&gt; <span class="number">1.</span> 将所有待比较数值（正整数）统一为同样的数位长度，数位较短的数前面补零。</span><br><span class="line"><span class="number">2.</span> 从最低位开始，依次进行一次排序。这样从最低位排序一直到最高位排序完成以后，数列就变成一个有序序列。</span><br><span class="line"></span><br><span class="line">(上述时从最右边开始的，称为LSD，Least significant digital，若从最左边开始称为MSD，Most significant digital)</span><br><span class="line"></span><br><span class="line">复杂度：</span><br><span class="line">&gt;基数排序的时间复杂度是O(k·n)，其中n是排序元素个数，k是数字位数。注意这不是说这个时间复杂度一定优于O(n·<span class="built_in">log</span>(n))，k的大小取决于数字位的选择（比如比特位数），和待排序数据所属数据类型的全集的大小；k决定了进行多少轮处理，而n是每轮处理的操作数目。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">c代码：</span><br></pre></td></tr></table></figure>
+<p>#define MAX 30</p>
+<p>#define BASE 10</p>
+<p>void radixsort(int array[],int n)<br>{<br>    int i,b[MAX],exp = 1;<br>    int m = array[0];</p>
+<pre><code><span class="comment">/*找出最大数*/</span>
+<span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;n;i++)
+{
+    <span class="keyword">if</span> (<span class="built_in">array</span>[i]&gt;m)
     {
-        <span class="keyword">if</span> (c+<span class="number">1</span>&lt;n &amp;&amp; a[c] &lt; a[c+<span class="number">1</span>])
-        {
-            c++;
-        }
-
-        <span class="keyword">if</span> (a[i]&gt;a[c]) 
-            <span class="keyword">break</span>;
-        <span class="keyword">else</span>{
-            tmp = a[c];
-            a[c] = a[i];
-            a[i] = tmp;
-
-            i = c;
-            c = <span class="number">2</span>*i+<span class="number">1</span>;
-        }
+        m = <span class="built_in">array</span>[i];
     }
 }
 
-<span class="function"><span class="keyword">void</span> <span class="title">heap_sort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> n)</span>
-</span>{
-    <span class="keyword">int</span> i,tmp;
-    <span class="comment">/*初始化堆*/</span>
-    <span class="keyword">for</span>(i=(n-<span class="number">2</span>)/<span class="number">2</span>;i&gt;=<span class="number">0</span>;i--)
-        shift(a,i,n);
+<span class="keyword">while</span>(m/<span class="built_in">exp</span> &gt;<span class="number">0</span>)
+{
+    <span class="keyword">int</span> bucket[BASE] = {<span class="number">0</span>};
 
-    <span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;n;i++)
-    {
-        <span class="comment">/*将堆的根节点保存*/</span>
-        tmp = a[<span class="number">0</span>];
-        a[<span class="number">0</span>] = a[n-i-<span class="number">1</span>];
-        a[n-i-<span class="number">1</span>] = tmp;
-
-        <span class="comment">/**/</span>
-        shift(a,<span class="number">0</span>,n-i-<span class="number">1</span>);
+    <span class="comment">/*按位入桶*/</span>
+    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++){
+        bucket[(<span class="built_in">array</span>[i]/<span class="built_in">exp</span>)%BASE]++;
     }
 
+    <span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;BASE;i++){
+        bucket[i] += bucket[i-<span class="number">1</span>];
+    }
+
+    <span class="comment">/*根据每位进行一次排序*/</span>
+    <span class="keyword">for</span> (i=n-<span class="number">1</span>;i&gt;=<span class="number">0</span>;i--){
+        b[--bucket[(<span class="built_in">array</span>[i]/<span class="built_in">exp</span>)%BASE]] = <span class="built_in">array</span>[i];
+    }
+
+    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++){
+        <span class="built_in">array</span>[i] = b[i];
+    }
+
+    <span class="built_in">exp</span> *= BASE;
 }
-</code></pre><h2 id="排序算法的比较">排序算法的比较</h2><p>平均而言，对于一般的<strong>随机序列顺序表</strong>而言，上述几种排序算法性能从低到高的顺序大致为：</p>
+</code></pre><p>}<br>```</p>
+<h2 id="排序算法的比较">排序算法的比较</h2><p>平均而言，对于一般的<strong>随机序列顺序表</strong>而言，上述几种排序算法性能从低到高的顺序大致为：</p>
 <blockquote>
 <p>冒泡排序 &lt; 插入排序 &lt; 选择排序 &lt; 希尔排序 &lt; 快速排序</p>
 </blockquote>
@@ -366,19 +359,15 @@ c代码：1234567891011121314151617181920212223void Swap(int *a,int *b)&amp;#123
 		<ul class="clearfix">
 		
 			
+				<li><a href="/tags/dynamic-programming/" title="dynamic_programming">dynamic_programming<sup>2</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/Hacking-Linux/" title="Hacking_Linux">Hacking_Linux<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/dynamic-programming/" title="dynamic_programming">dynamic_programming<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/数据结构/" title="数据结构">数据结构<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/dynamic-programing/" title="dynamic_programing">dynamic_programing<sup>1</sup></a></li>
 			
 		
 			
