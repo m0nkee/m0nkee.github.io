@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Stay Hungry Stay Foolish]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://m0nkee.github.io/"/>
-  <updated>2015-09-02T08:23:17.883Z</updated>
+  <updated>2015-11-26T09:11:48.724Z</updated>
   <id>http://m0nkee.github.io/</id>
   
   <author>
@@ -13,6 +13,199 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Git小记]]></title>
+    <link href="http://m0nkee.github.io/2015/11/26/about-git/"/>
+    <id>http://m0nkee.github.io/2015/11/26/about-git/</id>
+    <published>2015-11-26T09:09:03.000Z</published>
+    <updated>2015-11-26T09:11:48.724Z</updated>
+    <content type="html"><![CDATA[<h2 id="关于版本控制">关于版本控制</h2><p>本地版本控制系统<br><img src="http://git-scm.com/figures/18333fig0101-tn.png" alt="本地版本控制系统"></p>
+<p>集中式版本控制系统(CVCS)<br><img src="https://dn-anything-about-doc.qbox.me/userid1labid485time1423114955957" alt="集中式版本控制系统"></p>
+<p>分布式版本控制系统(DVCS)<br><img src="https://dn-anything-about-doc.qbox.me/userid1labid485time1423115040073" alt="分布式版本控制系统"></p>
+<h2 id="git特点">git特点</h2><ul>
+<li><p>直接记录快照，而非差异比较</p>
+<blockquote>
+<p>Git 和其他版本控制系统的主要差别在于，Git 只关心文件数据的整体是否发生变化，而大多数其他系统则只关心文件内容的具体差异。</p>
+</blockquote>
+</li>
+<li><p>近乎所以的操作是本地执行</p>
+</li>
+<li><p>时刻保持数据的完整性</p>
+<blockquote>
+<p>在保存到 Git之前，所有数据都要进行内容的校验和（checksum）计算，并将此结果作为数据的唯一标识和索引。<br>Git 使用 SHA-1 算法计算数据的校验和，通过对文件的内容或目录的结构计算出一个 SHA-1 哈希值，作为指纹字符串。</p>
+</blockquote>
+</li>
+<li><p>多数操作仅添加数据</p>
+</li>
+<li><p>文件对三种状态</p>
+<blockquote>
+</blockquote>
+</li>
+</ul>
+<ol>
+<li>已提交（committed）：表示文件已被安全地保存在本地数据库中了。</li>
+<li>已修改（modified）:表示修改了某个文件，但还没有提交保存。</li>
+<li>已暂存（staged）：表示把已修改的文件放到下次提交时要保存的清单了。</li>
+</ol>
+<p>文件流转三个工作区：git的工作目录区，暂存区，本地仓库</p>
+<p><img src="http://git-scm.com/figures/18333fig0106-tn.png" alt="文件流转"></p>
+<p>每个项目都有一个 Git 目录（译注：如果 git clone 出来的话，就是其中 .git 的目录；如果 git clone –bare 的话，新建的目录本身就是 Git 目录。），它是 Git 用来保存元数据和对象数据库的地方。该目录非常重要，每次克隆镜像仓库的时候，实际拷贝的就是这个目录里面的数据。</p>
+<p>从项目中取出某个版本的所有文件和目录，用以开始后续工作的叫做工作目录。这些文件实际上都是从 Git 目录中的压缩对象数据库中提取出来的，接下来就可以在工作目录中对这些文件进行编辑。</p>
+<p>所谓的暂存区域只不过是个简单的文件，一般都放在 Git 目录中。有时候人们会把这个文件叫做索引文件，不过标准说法还是叫暂存区域。</p>
+<p>基本的 Git 工作流程如下：</p>
+<blockquote>
+<ol>
+<li>在工作目录中修改某些文件。</li>
+<li>对修改后的文件进行快照，然后保存到暂存区域。</li>
+<li>提交更新，将保存在暂存区域的文件快照永久转储到 Git 目录中。</li>
+</ol>
+</blockquote>
+<p>文件状态变化周期<br><img src="http://git-scm.com/figures/18333fig0201-tn.png" alt="文件状态变化周期"><br>其中灰色箭头表示文件未跟踪状态，红色箭头表示文件已跟踪状态。</p>
+<h2 id="git安装">git安装</h2><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-<span class="keyword">get</span> install  <span class="comment"># hehe</span></span><br></pre></td></tr></table></figure>
+<h2 id="git初始化配置">git初始化配置</h2><p>命令工具：<code>git config</code> or <code>git-config</code>  –&gt;用来配置和读取相应的工作环境变量。</p>
+<ul>
+<li><code>/etc/gitconifg</code>文件：系统中对所有用户都普遍适用的配置。使用命令<code>git config --system</code>就是读取该文件。</li>
+<li><code>~/.gitconfig</code>文件：用户目录下的配置文件只适用于该用户。使用命令<code>git config --global</code>就是读取该文件。</li>
+<li><code>.git/config</code>文件：对当前项目有效。该配置文件会覆盖掉<code>/etc/gitconfig</code>中的同名变量。</li>
+</ul>
+<h3 id="配置用户信息">配置用户信息</h3><p>首先需要配置个人用户名和邮件地址。命令：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user<span class="class">.name</span> <span class="string">"monkee"</span></span><br><span class="line">git config --global user<span class="class">.email</span> monkee_lei@sina.com</span><br></pre></td></tr></table></figure></p>
+<h3 id="文本编辑器配置">文本编辑器配置</h3><p>默认是vi or vim<br><figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git conifg --<span class="keyword">global</span> core.<span class="keyword">editor</span> emacs</span><br></pre></td></tr></table></figure></p>
+<h3 id="差异分析工具">差异分析工具</h3><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --<span class="keyword">global</span> <span class="keyword">merge</span>.tool vimdiff</span><br></pre></td></tr></table></figure>
+<p>git可以理解的合并工具有：kdiff3，tkdiff，meld，xxdiff，emerge，vimdiff，gvimdiff，ecmerge，和 opendiff 等</p>
+<h3 id="查看配置信息">查看配置信息</h3><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config <span class="comment">--list</span></span><br></pre></td></tr></table></figure>
+<h2 id="帮助信息">帮助信息</h2><figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#三种方式</span><br><span class="line">git help &lt;verb&gt;</span><br><span class="line">git  &lt;verb&gt; --help</span><br><span class="line"><span class="keyword">man</span> git-&lt;verb&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="git创建仓库或克隆仓库">git创建仓库或克隆仓库</h2><p>在工作目录中初始化新仓库<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">git</span> init  <span class="comment">#执行后目录下会创建一个名为.git的目录</span></span><br></pre></td></tr></table></figure></p>
+<p>将当前目录下的文件纳入版本控制<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">add</span> filename  <span class="comment">#告诉git开始跟踪这些文件</span></span><br><span class="line">git commit -m <span class="string">'initial project version'</span>  <span class="comment"># 提交</span></span><br><span class="line"><span class="comment">#合并以上两步</span></span><br><span class="line">git commit -<span class="operator">a</span> -m</span><br></pre></td></tr></table></figure></p>
+<p>克隆现有的仓库<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">clone</span> [url]</span><br><span class="line"><span class="comment"># example</span></span><br><span class="line">git <span class="keyword">clone</span> git:<span class="comment">//github.com/schacon/grit.git </span></span><br><span class="line"><span class="comment">#当前目录下会创建一个名为grit的目录，目录下会有包含一个.git子目录，同样也可以修改目录名</span></span><br><span class="line">git <span class="keyword">clone</span> git:<span class="comment">//github.com/schacon/grit.git mygrit</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="检测文件状态">检测文件状态</h2><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">git</span> status</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看详细的文件修改,显示当前文件与暂存文本之间的差异</span></span><br><span class="line">git diff</span><br></pre></td></tr></table></figure>
+<h2 id="移除文件">移除文件</h2><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">rm</span> &lt;<span class="keyword">file</span>&gt; # 对于修改过且放进暂存区的文件，必须加参数-<span class="literal">f</span></span><br></pre></td></tr></table></figure>
+<h2 id="移动文件">移动文件</h2><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">git</span> mv file_from file_to</span><br></pre></td></tr></table></figure>
+<p><code>git mv</code>相当于三条命令：<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">mv</span> file_from file_to</span><br><span class="line"><span class="label">git</span> rm file_from</span><br><span class="line"><span class="label">git</span> <span class="keyword">add </span>file_to</span><br></pre></td></tr></table></figure></p>
+<h2 id="查看提交历史">查看提交历史</h2><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="command">log</span></span><br></pre></td></tr></table></figure>
+<p>参数说明</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">选项</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>-p</code></td>
+<td style="text-align:center">展开显示每次提交内容差异</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>-n</code></td>
+<td style="text-align:center">显示最近的n次更新</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>--stat</code></td>
+<td style="text-align:center">增改行统计</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>--word-diff</code></td>
+<td style="text-align:center">按word diff格式显示差异</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>--abbrev-commit</code></td>
+<td style="text-align:center">仅显示SHA-1的前几个字符</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>--pretty</code></td>
+<td style="text-align:center">使用其他格式显示历史提交信息。可用的选项包括 oneline，short，full，fuller和format（后跟指定格式）</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>--since,--after</code></td>
+<td style="text-align:center">仅显示指定时间之后的提交</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>--until,--before</code></td>
+<td style="text-align:center">仅显示指定时间之前的提交</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>-author</code></td>
+<td style="text-align:center">仅显示指定作者相关提交</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>--committer</code></td>
+<td style="text-align:center">仅显示指定提交者相关的提交</td>
+</tr>
+</tbody>
+</table>
+<h2 id="撤销操作">撤销操作</h2><p>撤销操作<em>不可逆</em></p>
+<ul>
+<li><p>修改最后一次提交</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">git</span> commit --amend  <span class="comment">#重新提交</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>取消已经暂存的文件</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="operator"><span class="keyword">reset</span> <span class="keyword">HEAD</span> &lt;<span class="keyword">file</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>取消对文件的修改</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkoout <span class="comment">--&lt;file&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="远程仓库使用">远程仓库使用</h2><ul>
+<li><p>查看当前的远程库</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">git</span> remote  <span class="comment">#至少可以看到一个origin的远程库，git默认使用这个名字来标识所克隆的原始仓库</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#加参数-v，显示对应的克隆地址</span></span><br><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加远程仓库</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">git</span> <span class="tag">remote</span> <span class="tag">add</span> <span class="attr_selector">[shortname]</span> <span class="attr_selector">[url]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>从远程仓库仓库抓取数据</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">git</span> fetch<span class="sqbracket"> [remote-name]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#例如</span></span><br><span class="line"><span class="keyword">git</span> fetch origin</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>如果设置了某个分支用于跟踪某个远端仓库的分支（参见下节及第三章的内容），可以使用<code>git pull</code>命令自动抓取数据下来，然后将远端分支自动合并到本地仓库中当前分支。在日常工作中我们经常这么用，既快且好。实际上，默认情况下 <code>git clone</code>命令本质上就是自动创建了本地的   <code>master</code> 分支用于跟踪远程仓库中的 <code>master</code> 分支（假设远程仓库确实有 <code>master</code> 分支）。所以一般我们运行 <code>git pull</code>，目的都是要从原始克隆的远端仓库中抓取数据后，合并到工作目录中的当前分支。</p>
+<ul>
+<li><p>推送数据到远程仓库</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">git</span> <span class="keyword">push </span>[remote-name] [<span class="keyword">branch-name]</span><br><span class="line"></span></span><br><span class="line">#例如将<span class="keyword">bending的master分支推送到origin服务器上</span><br><span class="line"></span><span class="label">git</span> <span class="keyword">push </span>origin master</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看远程仓库信息</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote <span class="operator"><span class="keyword">show</span> [remote-<span class="keyword">name</span>]</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="分支">分支</h2><p>分支一个很重要的作用是：<strong>分支开发工作流</strong></p>
+<ul>
+<li><p>查看分支</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="command">log</span> <span class="comment">--decorate</span></span><br><span class="line"></span><br><span class="line">git <span class="command">log</span> <span class="comment">--decorate --graph --all</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>分支的创建 &amp; 删除</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch branch-name  <span class="comment">#创建</span></span><br><span class="line">git branch <span class="operator">-d</span> branch-name <span class="comment">#删除</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>分支切换</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#分支切换会改变你工作目录中的文件</span></span><br><span class="line">git checkout branch-<span class="property">name</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#创建并切换分支</span></span><br><span class="line">git checkout -b branch-<span class="property">name</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#创建并切换分支</span></span><br><span class="line">git checkout -b branch-<span class="property">name</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>分支的合并</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout master  <span class="comment">#切换到master分支</span></span><br><span class="line">git <span class="built_in">merge</span> testing  <span class="comment">#合并分支master和分支testing</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>合并时需注意分支的创建对先后关系以及是否属于同一分支等问题。</p>
+<ul>
+<li>显示分支<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">git</span> branch <span class="comment"># 加选项-v可以显示更详细的信息</span></span><br><span class="line"><span class="comment">#--merged与--no-merged这两个有用的选项可以过滤这个列表中已经合并或尚未合并到当前分支的分支</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="git支持的协议">git支持的协议</h2><p>git可以使用四种主要的协议来传输资料：本地协议（local）、HTTP协议、SSH(Secure Shell)协议和git协议。</p>
+<h2 id="play_with_github">play with github</h2><p>github是一个git版本库托管商，很多开源项目都是使用github实现托管的。</p>
+<ul>
+<li>SSH公钥的生成</li>
+</ul>
+<p>github使用SSH公钥进行认证。默认情况下，用户的SSH密钥存放在<code>~/.ssh</code>目录下，我们需要查看是否有以<code>id_dsa</code>或<code>id_rsa</code>命名的文件，其中一个带有<code>.pub</code>扩展名，即为公钥，另一个为私钥。如果没有该文件或者没有<code>.ssh</code>目录，可以使用<code>ssh-keygen</code>生成。</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -<span class="keyword">C</span> <span class="string">"monkee_lei@sina.com"</span></span><br></pre></td></tr></table></figure>
+<p>登陆github添加公共密钥。</p>
+<p>验证是否配置成功<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line">Hi username! You've successfully authenticated, <span class="keyword">but</span> GitHub <span class="keyword">does</span> <span class="keyword">not</span> provide shell access.</span><br></pre></td></tr></table></figure></p>
+<h2 id="在服务器上搭建自己的git">在服务器上搭建自己的git</h2><hr>
+<p>参考：<br><a href="http://gitbook.liuhui998.com/" target="_blank" rel="external">git community book 中文版</a><br><a href="http://git-scm.com/book/zh/v2/" target="_blank" rel="external">pro git</a><br><a href="https://help.github.com/articles/generating-ssh-keys/" target="_blank" rel="external">Generating SSH keys</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="关于版本控制">关于版本控制</h2><p>本地版本控制系统<br><img src="http://git-scm.com/figures/18333fig0101-tn.png" alt="本地版本控制系统"></p>
+<p>集中式版本控制系统(CVCS)<b]]>
+    </summary>
+    
+      <category term="git" scheme="http://m0nkee.github.io/tags/git/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[best time to buy and sell stock]]></title>
